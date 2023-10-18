@@ -53,8 +53,34 @@ describe('login bank', () => {
     bank.usuarioRegularInicioPatrimonioCalendarioDePagos()
   })
 
-  it.only('Usuario regular - Inicio Patrimonio Detalle de Posicion', ()=>{
+  it('Usuario regular - Inicio Patrimonio Detalle de Posicion', ()=>{
     bank.usuarioRegularInicioPatrimonioDetallePosicion()
   })
+
+  it('Usuario regular Firmante - Inicio Patrimonio Resumen', () => {
+    bank.usuarioRegularFirmanteInicioPatrimonioResumen()
+  })
+
+  it('Usuario regular Firmante - Inicio Patrimonio Rentabilidad', () => {
+    bank.usuarioRegularFirmanteInicioPatrimonioRentabilidadMensual()
+  })
+
+  it('Usuario regular Firmante - Inicio Patrimonio Evolución Historica', () => {
+    bank.usuarioRegularFirmanteInicioPatrimonioEvolucionHistorica()
+  })
+
+  it('Usuario regular Firmante - Inicio Patrimonio Calendario de Pagos', ()=>{
+    bank.usuarioRegularFirmanteInicioPatrimonioCalendarioDePagos()
+  })
+
+  it('Usuario regular Firmante - Inicio Patrimonio Detalle de Posicion', ()=>{
+    bank.usuarioRegularFirmanteInicioPatrimonioDetallePosicion()
+  })
+
+
+  it.only('Usuario regular Firmante - Inicio Patrimonio Detalle de Posicion', ()=>{
+    bank.usuarioRegularTodosteInicioPatrimonioDetallePosicion()
+  })
+
 
 })
