@@ -82,5 +82,10 @@ describe('login bank', () => {
     bank.usuarioRegularTodosteInicioPatrimonioDetallePosicion()
   })
 
+  // it('Modulo Patrimonio - Vista todos, detalle de cada portafolio', ()=>{
+  //   bank.usuarioTodosPatrimonioDetallePortafolio()
+
+  // })
+
 
 })

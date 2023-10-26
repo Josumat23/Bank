@@ -985,6 +985,85 @@ class bankPage {
 
 }
 
+//Módulo Patrimonio - Vista Todos (detalle de cada portafolio)
+
+usuarioTodosPatrimonioDetallePortafolio(){
+    cy.visit('https://dev.inteligobank.com/web/guest/home6')
+    cy.get(this.idUsuarioInPut).type("12560")
+    cy.get(this.btnLogin).click()
+    cy.get(this.idPassInPut).type("Inteligo1")
+    cy.get(this.btnIngresar).click()
+    cy.wait(6000)
+
+// Ingresando al modulo de patrimonio
+
+    cy.get(':nth-child(2) > .box-hover > .header-menu-text').should('be.visible').click()
+    cy.get('#idFiltroPerfil').should('be.visible').then((e)=>{
+
+        cy.get('#idFiltroPerfil > .icono-select').click()
+        cy.get('#idFiltroPerfil > .listaselect > .item-listaselect > :nth-child(2)').click() 
+        cy.get('#idFiltroPerfil > .icono-select').click()  
+    })
+
+//vista de todos
+
+    cy.get('#idFiltroPerfil > .seleccionado').should('contain.text','Todos')
+    cy.get('.titulo_principal').should('contain.text','Mi Patrimonio')
+
+    cy.get('#totalPatrimnio').should('have.length.greaterThan',0)
+    cy.get('.tab-grafico-desktop').should('be.visible') 
+    cy.get('#content-tabs-int1 > :nth-child(1) > .tab-active-int').should('contain.text','Detalle de Posición').and('be.visible')
+    cy.get('.analytics-tab-abono-desktop').should('contain.text','Ver mis abonos').and('not.be.enabled')
+    cy.get('#rdClaseActivo').should('be.enabled')
+    //cy.get('#rdTipoProducto').should('not.be.enabled').and('contain.text','Tipo de producto')
+    cy.get('[for="radio-b"]').should('not.be.enabled').and('contain.text','Tipo de producto')
+    
+    //Si da click por tipo de producto
+    //Detalle de posicion
+    // cy.get('#rdTipoProducto').click().then(()=>{
+         
+    //     cy.get('[for="radio-b"]').then(()=>{
+
+    //         cy.get(':nth-child(2) > [style="text-transform: capitalize;"]').and('contain.text','Trading')
+    //         //cy.get(':nth-child(3) > [style="text-transform: capitalize;"]').and('contain.text','Accion')
+    //         cy.get(':nth-child(4) > [style="text-transform: capitalize;"]').and('include.text','Bonos')
+    //         cy.get(':nth-child(4) > [style="text-transform: capitalize;"]').and('contain.text','Fondos')
+    //         cy.get(':nth-child(6) > [style="text-transform: capitalize;"]').and('contain.text','Productos Estructurados')
+    //         cy.get('.table-footer-int > :nth-child(1)').and('contain.text','Total')
+
+    //     })
+
+
+    // })
+
+    //Cash (Cuentas bancarias)
+
+    cy.get(':nth-child(1) > .card-accordion-int.analytics-tipo-Cliente > .nombre-item-int').click().then(()=>{
+        cy.get('[style="display: block;"] > :nth-child(1) > .card-accordion-int.acordeon-cash-analytics > .nombre-item-int').should('include.text','Cash').click().then(()=>{
+
+            cy.get(':nth-child(1) > :nth-child(2) > :nth-child(1) > .collapse-accordion-int > .accordion-item-int.detalle-analytics-Current-Account > .card-accordion-int > .nombre-item-int').should('include.text','Current Account').click()
+            cy.get('#idCerrarPopUpDetalleCash').click()
+
+            cy.get(':nth-child(1) > :nth-child(2) > :nth-child(1) > .collapse-accordion-int > .accordion-item-int.detalle-analytics-Trading-Account > .card-accordion-int').should('include.text','Trading Account').click()
+            cy.get('#idCerrarPopUpDetalleCash').click()
+
+        })
+        
+
+        cy.get(':nth-child(1) > :nth-child(2) > :nth-child(3) > .portafolio-content').should('include.text','Portafolio').click().then(()=>{
+            cy.get('.card-accordion-int.analytics-tipo-Renta-Fija > .nombre-item-int').should('include.text','Renta Fija')
+
+
+        })
+
+    })
+
+
+
+
+
+}
+
 }
 
 module.exports = new bankPage()
